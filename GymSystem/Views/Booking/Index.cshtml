@@ -1,0 +1,649 @@
+﻿@model IEnumerable<SessionViewModel>
+
+@{
+    ViewData["Title"] = "Bookings";
+
+    var sessions = Model?.ToList() ?? new List<SessionViewModel>();
+
+    var upcomingSessions = sessions
+        .Where(x => x.Status == "Upcoming")
+        .ToList();
+
+    var ongoingSessions = sessions
+        .Where(x => x.Status == "Ongoing")
+        .ToList();
+}
+
+<div class="booking-page">
+
+    @* ==================== Page Header ==================== *@
+
+    <section class="page-header">
+
+        <div>
+            <span class="page-subtitle">
+                SESSION MANAGEMENT
+            </span>
+
+            <h1 class="page-title">
+                Bookings & Attendance
+            </h1>
+
+            <p class="page-description">
+                Manage member bookings and track attendance across gym sessions.
+            </p>
+        </div>
+
+    </section>
+
+
+    @* ==================== Statistics ==================== *@
+
+    <section class="booking-statistics">
+
+        <div class="row g-3">
+
+            <div class="col-12 col-md-4">
+
+                <div class="booking-summary-card">
+
+                    <div class="booking-summary-icon total">
+
+                        <i class="bi bi-calendar2-week"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Available Sessions
+                        </span>
+
+                        <h3>
+                            @(upcomingSessions.Count + ongoingSessions.Count)
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-12 col-md-4">
+
+                <div class="booking-summary-card">
+
+                    <div class="booking-summary-icon upcoming">
+
+                        <i class="bi bi-calendar-event"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Upcoming Sessions
+                        </span>
+
+                        <h3>
+                            @upcomingSessions.Count
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-12 col-md-4">
+
+                <div class="booking-summary-card">
+
+                    <div class="booking-summary-icon ongoing">
+
+                        <i class="bi bi-activity"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Ongoing Sessions
+                        </span>
+
+                        <h3>
+                            @ongoingSessions.Count
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    @* ==================== Upcoming Sessions ==================== *@
+
+    <section class="dashboard-panel booking-section">
+
+        <div class="dashboard-panel-header">
+
+            <div>
+
+                <div class="booking-section-title">
+
+                    <div class="booking-section-icon upcoming">
+
+                        <i class="bi bi-calendar-event"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Upcoming Sessions
+                        </h3>
+
+                        <p>
+                            Manage members registered for upcoming sessions
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <span class="booking-count-badge upcoming">
+
+                @upcomingSessions.Count Sessions
+
+            </span>
+
+        </div>
+
+
+        @if (upcomingSessions.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var session in upcomingSessions)
+                {
+                    <div class="col-12 col-md-6 col-xl-4">
+
+                        <div class="booking-session-card upcoming-card">
+
+
+                            @* ==================== Card Header ==================== *@
+
+                            <div class="booking-session-header">
+
+                                <div class="booking-session-main">
+
+                                    <div class="booking-session-icon upcoming">
+
+                                        <i class="bi bi-calendar-event"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span class="booking-session-label">
+                                            SESSION
+                                        </span>
+
+                                        <h4>
+                                            @session.CategoryName
+                                        </h4>
+
+                                    </div>
+
+                                </div>
+
+
+                                <span class="booking-status upcoming">
+
+                                    <span class="booking-status-dot"></span>
+
+                                    @session.Status
+
+                                </span>
+
+                            </div>
+
+
+                            @* ==================== Description ==================== *@
+
+                            <p class="booking-session-description">
+
+                                @session.Description
+
+                            </p>
+
+
+                            @* ==================== Session Information ==================== *@
+
+                            <div class="booking-session-details">
+
+                                <div class="booking-detail">
+
+                                    <div class="booking-detail-icon">
+
+                                        <i class="bi bi-person"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Trainer
+                                        </span>
+
+                                        <strong>
+                                            @session.TrainerName
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="booking-detail">
+
+                                    <div class="booking-detail-icon">
+
+                                        <i class="bi bi-calendar3"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Session Date
+                                        </span>
+
+                                        <strong>
+                                            @session.DateDisplay
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="booking-detail">
+
+                                    <div class="booking-detail-icon">
+
+                                        <i class="bi bi-clock"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Session Time
+                                        </span>
+
+                                        <strong>
+                                            @session.TimeRangeDisplay
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="booking-detail">
+
+                                    <div class="booking-detail-icon">
+
+                                        <i class="bi bi-hourglass-split"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Duration
+                                        </span>
+
+                                        <strong>
+                                            @session.Duration
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            @* ==================== Capacity ==================== *@
+
+                            <div class="booking-capacity">
+
+                                <div class="booking-capacity-header">
+
+                                    <span>
+
+                                        <i class="bi bi-people me-1"></i>
+
+                                        Available Slots
+
+                                    </span>
+
+                                    <strong>
+
+                                        @session.AvailableSlots / @session.Capacity
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            @* ==================== Action ==================== *@
+
+                            <a asp-action="GetMembersForUpcomingSession"
+                                   asp-route-id="@session.Id"
+                                   class="booking-action-button upcoming">
+
+                                <span>
+
+                                    <i class="bi bi-people"></i>
+
+                                    Manage Bookings
+
+                                </span>
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="booking-empty-state">
+
+                <div class="booking-empty-icon">
+
+                    <i class="bi bi-calendar-x"></i>
+
+                </div>
+
+                <h4>
+                    No Upcoming Sessions
+                </h4>
+
+                <p>
+                    There are currently no sessions available for booking management.
+                </p>
+
+            </div>
+        }
+
+    </section>
+
+
+    @* ==================== Ongoing Sessions ==================== *@
+
+    <section class="dashboard-panel booking-section">
+
+        <div class="dashboard-panel-header">
+
+            <div>
+
+                <div class="booking-section-title">
+
+                    <div class="booking-section-icon ongoing">
+
+                        <i class="bi bi-activity"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Ongoing Sessions
+                        </h3>
+
+                        <p>
+                            Track and manage member attendance for active sessions
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <span class="booking-count-badge ongoing">
+
+                @ongoingSessions.Count Sessions
+
+            </span>
+
+        </div>
+
+
+        @if (ongoingSessions.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var session in ongoingSessions)
+                {
+                    <div class="col-12 col-md-6 col-xl-4">
+
+                        <div class="booking-session-card ongoing-card">
+
+
+                            @* ==================== Card Header ==================== *@
+
+                            <div class="booking-session-header">
+
+                                <div class="booking-session-main">
+
+                                    <div class="booking-session-icon ongoing">
+
+                                        <i class="bi bi-activity"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span class="booking-session-label">
+                                            LIVE SESSION
+                                        </span>
+
+                                        <h4>
+                                            @session.CategoryName
+                                        </h4>
+
+                                    </div>
+
+                                </div>
+
+
+                                <span class="booking-status ongoing">
+
+                                    <span class="booking-status-dot"></span>
+
+                                    @session.Status
+
+                                </span>
+
+                            </div>
+
+
+                            @* ==================== Description ==================== *@
+
+                            <p class="booking-session-description">
+
+                                @session.Description
+
+                            </p>
+
+
+                            @* ==================== Information ==================== *@
+
+                            <div class="booking-session-details">
+
+                                <div class="booking-detail">
+
+                                    <div class="booking-detail-icon">
+
+                                        <i class="bi bi-person"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Trainer
+                                        </span>
+
+                                        <strong>
+                                            @session.TrainerName
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="booking-detail">
+
+                                    <div class="booking-detail-icon">
+
+                                        <i class="bi bi-calendar3"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Session Date
+                                        </span>
+
+                                        <strong>
+                                            @session.DateDisplay
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="booking-detail">
+
+                                    <div class="booking-detail-icon">
+
+                                        <i class="bi bi-clock"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Session Time
+                                        </span>
+
+                                        <strong>
+                                            @session.TimeRangeDisplay
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="booking-detail">
+
+                                    <div class="booking-detail-icon">
+
+                                        <i class="bi bi-people"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Session Capacity
+                                        </span>
+
+                                        <strong>
+                                            @session.AvailableSlots / @session.Capacity
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            @* ==================== Action ==================== *@
+
+                            <a asp-action="GetMembersForOngoingSessions"
+                                   asp-route-id="@session.Id"
+                                   class="booking-action-button ongoing">
+
+                                <span>
+
+                                    <i class="bi bi-person-check"></i>
+
+                                    Manage Attendance
+
+                                </span>
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="booking-empty-state">
+
+                <div class="booking-empty-icon ongoing">
+
+                    <i class="bi bi-activity"></i>
+
+                </div>
+
+                <h4>
+                    No Ongoing Sessions
+                </h4>
+
+                <p>
+                    There are currently no active sessions available for attendance management.
+                </p>
+
+            </div>
+        }
+
+    </section>
+
+</div>

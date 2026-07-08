@@ -1,0 +1,447 @@
+﻿@model IEnumerable<PlanViewModel>
+
+@{
+    ViewData["Title"] = "Membership Plans";
+
+    var plans = Model?.ToList() ?? new List<PlanViewModel>();
+    var activePlans = plans.Count(p => p.IsActive);
+    var inactivePlans = plans.Count(p => !p.IsActive);
+}
+
+<div class="plans-page">
+
+    @* ==================== Alert Messages ==================== *@
+
+    @if (TempData["SuccessMessage"] is not null)
+    {
+        <div id="Alert"
+             class="alert alert-success alert-dismissible fade show">
+
+            <i class="bi bi-check-circle-fill me-2"></i>
+
+            @TempData["SuccessMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+
+        </div>
+    }
+    else if (TempData["ErrorMessage"] is not null)
+    {
+        <div id="Alert"
+             class="alert alert-danger alert-dismissible fade show">
+
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+            @TempData["ErrorMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+
+        </div>
+    }
+
+
+    @* ==================== Page Header ==================== *@
+
+    <section class="page-header">
+
+        <div>
+
+            <span class="page-subtitle">
+                MEMBERSHIP MANAGEMENT
+            </span>
+
+            <h1 class="page-title">
+                Membership Plans
+            </h1>
+
+            <p class="page-description">
+                Manage gym membership packages, pricing and availability.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    @* ==================== Plans Statistics ==================== *@
+
+    <section class="plans-statistics">
+
+        <div class="row g-3">
+
+            <div class="col-12 col-md-4">
+
+                <div class="plan-summary-card">
+
+                    <div class="plan-summary-icon">
+
+                        <i class="bi bi-clipboard-data"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span class="plan-summary-label">
+                            Total Plans
+                        </span>
+
+                        <h3>
+                            @plans.Count
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-12 col-md-4">
+
+                <div class="plan-summary-card">
+
+                    <div class="plan-summary-icon active">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span class="plan-summary-label">
+                            Active Plans
+                        </span>
+
+                        <h3>
+                            @activePlans
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-12 col-md-4">
+
+                <div class="plan-summary-card">
+
+                    <div class="plan-summary-icon inactive">
+
+                        <i class="bi bi-pause-circle"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span class="plan-summary-label">
+                            Inactive Plans
+                        </span>
+
+                        <h3>
+                            @inactivePlans
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    @* ==================== Plans Content ==================== *@
+
+    <section class="plans-content">
+
+        <div class="dashboard-panel">
+
+            <div class="dashboard-panel-header">
+
+                <div>
+
+                    <h3>
+                        Available Plans
+                    </h3>
+
+                    <p>
+                        View and manage all gym membership plans
+                    </p>
+
+                </div>
+
+                <span class="plans-total-badge">
+                    @plans.Count Plans
+                </span>
+
+            </div>
+
+
+            @if (plans.Any())
+            {
+                <div class="row g-4">
+
+                    @foreach (var plan in plans)
+                    {
+                        <div class="col-12 col-md-6 col-xl-4">
+
+                            <div class="membership-plan-card
+                                @(plan.IsActive
+                                                                     ? "active-plan"
+                                                                     : "inactive-plan")">
+
+
+                                @* ==================== Card Header ==================== *@
+
+                                <div class="membership-plan-header">
+
+                                    <div>
+
+                                        <span class="plan-status-badge
+                                            @(plan.IsActive
+                                                                                              ? "status-active"
+                                                                                              : "status-inactive")">
+
+                                            <span class="status-dot"></span>
+
+                                            @(plan.IsActive
+                                                ? "Active"
+                                                : "Inactive")
+
+                                        </span>
+
+
+                                        <h3 class="membership-plan-name">
+
+                                            @plan.Name
+
+                                        </h3>
+
+                                    </div>
+
+
+                                    <div class="plan-menu dropdown">
+
+                                        <button type="button"
+                                                class="plan-menu-button"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+
+                                            <i class="bi bi-three-dots"></i>
+
+                                        </button>
+
+
+                                        <ul class="dropdown-menu dropdown-menu-end">
+
+                                            <li>
+
+                                                <a asp-action="Details"
+                                                       asp-route-id="@plan.Id"
+                                                       class="dropdown-item">
+
+                                                    <i class="bi bi-eye me-2"></i>
+
+                                                    View Details
+
+                                                </a>
+
+                                            </li>
+
+
+                                            <li>
+
+                                                <a asp-action="Edit"
+                                                       asp-route-id="@plan.Id"
+                                                       class="dropdown-item">
+
+                                                    <i class="bi bi-pencil me-2"></i>
+
+                                                    Edit Plan
+
+                                                </a>
+
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+
+                                </div>
+
+
+                                @* ==================== Price ==================== *@
+
+                                <div class="membership-plan-price">
+
+                                    <span class="plan-price">
+
+                                        @plan.Price
+
+                                    </span>
+
+                                    <div>
+
+                                        <span class="plan-currency">
+                                            EGP
+                                        </span>
+
+                                        <small>
+                                            / membership
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                @* ==================== Description ==================== *@
+
+                                <p class="membership-plan-description">
+
+                                    @plan.Description
+
+                                </p>
+
+
+                                @* ==================== Information ==================== *@
+
+                                <div class="membership-plan-information">
+
+                                    <div class="plan-information-item">
+
+                                        <div class="plan-information-icon">
+
+                                            <i class="bi bi-calendar-check"></i>
+
+                                        </div>
+
+                                        <div>
+
+                                            <span>
+                                                Duration
+                                            </span>
+
+                                            <strong>
+                                                @plan.Duration
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                @* ==================== Actions ==================== *@
+
+                                <div class="membership-plan-actions">
+
+                                    <a asp-action="Details"
+                                           asp-route-id="@plan.Id"
+                                           class="btn plan-details-button">
+
+                                        <i class="bi bi-eye me-1"></i>
+
+                                        View Details
+
+                                    </a>
+
+
+                                    <a asp-action="Edit"
+                                           asp-route-id="@plan.Id"
+                                           class="btn plan-edit-button">
+
+                                        <i class="bi bi-pencil me-1"></i>
+
+                                        Edit
+
+                                    </a>
+
+                                </div>
+
+
+                                @* ==================== Change Status ==================== *@
+
+                                <form asp-action="ChangeStatus"
+                                      asp-route-id="@plan.Id"
+                                      method="post"
+                                      class="plan-status-form">
+
+                                    <button type="submit"
+                                            class="plan-status-button
+                                        @(plan.IsActive
+                                                                                        ? "deactivate-button"
+                                                                                        : "activate-button")">
+
+                                        @if (plan.IsActive)
+                                        {
+                                            <i class="bi bi-pause-circle"></i>
+
+                                            <span>
+                                                Deactivate Plan
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-check-circle"></i>
+
+                                            <span>
+                                                Activate Plan
+                                            </span>
+                                        }
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            }
+            else
+            {
+                <div class="plans-empty-state">
+
+                    <div class="plans-empty-icon">
+
+                        <i class="bi bi-clipboard-x"></i>
+
+                    </div>
+
+                    <h3>
+                        No Membership Plans
+                    </h3>
+
+                    <p>
+                        There are currently no membership plans available.
+                    </p>
+
+                </div>
+            }
+
+        </div>
+
+    </section>
+
+</div>
+
+
+@section Scripts {
+
+    <partial name="_AlertBoxScript" />
+
+}

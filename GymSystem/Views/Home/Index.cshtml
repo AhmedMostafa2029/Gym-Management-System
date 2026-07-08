@@ -1,0 +1,723 @@
+﻿@using GymSystem.BLL.ViewModels.AnalyticsViewModel
+@model AnalyticsViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dashboard-page">
+
+    @* ==================== Dashboard Header ==================== *@
+    <section class="dashboard-header mb-4">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+
+            <div>
+                <span class="dashboard-subtitle">POWER FITNESS MANAGEMENT</span>
+
+                <h1 class="dashboard-title mt-2 mb-2">
+                    Welcome Back 👋
+                </h1>
+
+                <p class="dashboard-description mb-0">
+                    Here's what's happening with your gym today.
+                </p>
+            </div>
+
+            <div class="dashboard-header-actions">
+                <a asp-controller="Member"
+                       asp-action="Create"
+                       class="btn btn-fill rounded-pill px-4 py-2">
+
+                    <i class="bi bi-person-plus me-2"></i>
+                    Add Member
+
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    @* ==================== Statistics Cards ==================== *@
+    <section class="dashboard-statistics mb-4">
+
+        <div class="row g-4">
+
+            @* Total Members *@
+            <div class="col-12 col-md-6 col-xl-4">
+
+                <div class="dashboard-stat-card">
+
+                    <div class="stat-card-header">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                        <span class="stat-label">
+                            Total Members
+                        </span>
+
+                    </div>
+
+                    <div class="stat-card-body">
+
+                        <h2 class="stat-number">
+                            @Model.TotalMembers
+                        </h2>
+
+                        <p class="stat-description">
+                            Registered gym members
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card-footer">
+
+                        <a asp-controller="Member"
+                               asp-action="Index">
+
+                            View Members
+
+                            <i class="bi bi-arrow-right ms-1"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            @* Active Members *@
+            <div class="col-12 col-md-6 col-xl-4">
+
+                <div class="dashboard-stat-card">
+
+                    <div class="stat-card-header">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-person-check"></i>
+                        </div>
+
+                        <span class="stat-label">
+                            Active Members
+                        </span>
+
+                    </div>
+
+                    <div class="stat-card-body">
+
+                        <h2 class="stat-number">
+                            @Model.ActiveMembers
+                        </h2>
+
+                        <p class="stat-description">
+                            Members with active memberships
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card-footer">
+
+                        <a asp-controller="Membership"
+                               asp-action="Index">
+
+                            View Memberships
+
+                            <i class="bi bi-arrow-right ms-1"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            @* Trainers *@
+            <div class="col-12 col-md-6 col-xl-4">
+
+                <div class="dashboard-stat-card">
+
+                    <div class="stat-card-header">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+
+                        <span class="stat-label">
+                            Trainers
+                        </span>
+
+                    </div>
+
+                    <div class="stat-card-body">
+
+                        <h2 class="stat-number">
+                            @Model.TotalTrainers
+                        </h2>
+
+                        <p class="stat-description">
+                            Professional gym trainers
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card-footer">
+
+                        <a asp-controller="Trainer"
+                               asp-action="Index">
+
+                            View Trainers
+
+                            <i class="bi bi-arrow-right ms-1"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            @* Upcoming Sessions *@
+            <div class="col-12 col-md-6 col-xl-4">
+
+                <div class="dashboard-stat-card">
+
+                    <div class="stat-card-header">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-calendar-event"></i>
+                        </div>
+
+                        <span class="stat-label">
+                            Upcoming Sessions
+                        </span>
+
+                    </div>
+
+                    <div class="stat-card-body">
+
+                        <h2 class="stat-number">
+                            @Model.UpcomingSessions
+                        </h2>
+
+                        <p class="stat-description">
+                            Sessions scheduled to start
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card-footer">
+
+                        <a asp-controller="Session"
+                               asp-action="Index">
+
+                            View Sessions
+
+                            <i class="bi bi-arrow-right ms-1"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            @* Ongoing Sessions *@
+            <div class="col-12 col-md-6 col-xl-4">
+
+                <div class="dashboard-stat-card">
+
+                    <div class="stat-card-header">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-activity"></i>
+                        </div>
+
+                        <span class="stat-label">
+                            Ongoing Sessions
+                        </span>
+
+                    </div>
+
+                    <div class="stat-card-body">
+
+                        <h2 class="stat-number">
+                            @Model.OngoingSessions
+                        </h2>
+
+                        <p class="stat-description">
+                            Sessions currently in progress
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card-footer">
+
+                        <a asp-controller="Booking"
+                               asp-action="Index">
+
+                            Manage Bookings
+
+                            <i class="bi bi-arrow-right ms-1"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            @* Completed Sessions *@
+            <div class="col-12 col-md-6 col-xl-4">
+
+                <div class="dashboard-stat-card">
+
+                    <div class="stat-card-header">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+
+                        <span class="stat-label">
+                            Completed Sessions
+                        </span>
+
+                    </div>
+
+                    <div class="stat-card-body">
+
+                        <h2 class="stat-number">
+                            @Model.CompletedSessions
+                        </h2>
+
+                        <p class="stat-description">
+                            Successfully completed sessions
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card-footer">
+
+                        <a asp-controller="Session"
+                               asp-action="Index">
+
+                            View Sessions
+
+                            <i class="bi bi-arrow-right ms-1"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    @* ==================== Dashboard Content ==================== *@
+    <section class="dashboard-content mb-4">
+
+        <div class="row g-4">
+
+
+            @* ==================== Session Overview ==================== *@
+            <div class="col-12 col-xl-7">
+
+                <div class="dashboard-panel h-100">
+
+                    <div class="dashboard-panel-header">
+
+                        <div>
+
+                            <h3>
+                                Session Overview
+                            </h3>
+
+                            <p>
+                                Current status of gym sessions
+                            </p>
+
+                        </div>
+
+                        <a asp-controller="Session"
+                               asp-action="Index"
+                               class="dashboard-panel-link">
+
+                            View All
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="session-overview">
+
+
+                        @* Upcoming Sessions *@
+                        <div class="session-overview-item">
+
+                            <div class="session-overview-info">
+
+                                <div class="session-overview-icon">
+                                    <i class="bi bi-calendar-event"></i>
+                                </div>
+
+                                <div>
+
+                                    <h5>
+                                        Upcoming Sessions
+                                    </h5>
+
+                                    <p>
+                                        Scheduled sessions
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <span class="session-count">
+                                @Model.UpcomingSessions
+                            </span>
+
+                        </div>
+
+
+                        @* Ongoing Sessions *@
+                        <div class="session-overview-item">
+
+                            <div class="session-overview-info">
+
+                                <div class="session-overview-icon">
+                                    <i class="bi bi-activity"></i>
+                                </div>
+
+                                <div>
+
+                                    <h5>
+                                        Ongoing Sessions
+                                    </h5>
+
+                                    <p>
+                                        Currently active sessions
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <span class="session-count">
+                                @Model.OngoingSessions
+                            </span>
+
+                        </div>
+
+
+                        @* Completed Sessions *@
+                        <div class="session-overview-item">
+
+                            <div class="session-overview-info">
+
+                                <div class="session-overview-icon">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+
+                                <div>
+
+                                    <h5>
+                                        Completed Sessions
+                                    </h5>
+
+                                    <p>
+                                        Finished gym sessions
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <span class="session-count">
+                                @Model.CompletedSessions
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            @* ==================== Members Overview ==================== *@
+            <div class="col-12 col-xl-5">
+
+                <div class="dashboard-panel h-100">
+
+                    <div class="dashboard-panel-header">
+
+                        <div>
+
+                            <h3>
+                                Members Overview
+                            </h3>
+
+                            <p>
+                                Current membership statistics
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="members-overview">
+
+                        <div class="members-overview-main">
+
+                            <div class="members-overview-icon">
+
+                                <i class="bi bi-people"></i>
+
+                            </div>
+
+                            <div>
+
+                                <span class="members-overview-number">
+                                    @Model.TotalMembers
+                                </span>
+
+                                <p>
+                                    Total Members
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="members-overview-details">
+
+                            <div>
+
+                                <span class="overview-dot"></span>
+
+                                <span>
+                                    Active Members
+                                </span>
+
+                            </div>
+
+                            <strong>
+                                @Model.ActiveMembers
+                            </strong>
+
+                        </div>
+
+
+                        <div class="members-overview-details">
+
+                            <div>
+
+                                <span class="overview-dot"></span>
+
+                                <span>
+                                    Total Trainers
+                                </span>
+
+                            </div>
+
+                            <strong>
+                                @Model.TotalTrainers
+                            </strong>
+
+                        </div>
+
+
+                        <a asp-controller="Member"
+                               asp-action="Index"
+                               class="btn btn-fill w-100 rounded-pill mt-4">
+
+                            Manage Members
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    @* ==================== Quick Actions ==================== *@
+    <section class="dashboard-quick-actions">
+
+        <div class="dashboard-panel">
+
+            <div class="dashboard-panel-header">
+
+                <div>
+
+                    <h3>
+                        Quick Actions
+                    </h3>
+
+                    <p>
+                        Quickly access frequently used management features
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="row g-3">
+
+
+                @* Add Member *@
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+
+                    <a asp-controller="Member"
+                           asp-action="Create"
+                           class="quick-action-card">
+
+                        <div class="quick-action-icon">
+                            <i class="bi bi-person-plus"></i>
+                        </div>
+
+                        <span>
+                            Add Member
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                @* Add Trainer *@
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+
+                    <a asp-controller="Trainer"
+                           asp-action="Create"
+                           class="quick-action-card">
+
+                        <div class="quick-action-icon">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+
+                        <span>
+                            Add Trainer
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                @* Create Session *@
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+
+                    <a asp-controller="Session"
+                           asp-action="Create"
+                           class="quick-action-card">
+
+                        <div class="quick-action-icon">
+                            <i class="bi bi-calendar-plus"></i>
+                        </div>
+
+                        <span>
+                            Create Session
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                @* Memberships *@
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+
+                    <a asp-controller="Membership"
+                           asp-action="Index"
+                           class="quick-action-card">
+
+                        <div class="quick-action-icon">
+                            <i class="bi bi-card-checklist"></i>
+                        </div>
+
+                        <span>
+                            Memberships
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                @* Bookings *@
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+
+                    <a asp-controller="Booking"
+                           asp-action="Index"
+                           class="quick-action-card">
+
+                        <div class="quick-action-icon">
+                            <i class="bi bi-journal-check"></i>
+                        </div>
+
+                        <span>
+                            Bookings
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                @* Plans *@
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+
+                    <a asp-controller="Plan"
+                           asp-action="Index"
+                           class="quick-action-card">
+
+                        <div class="quick-action-icon">
+                            <i class="bi bi-clipboard-data"></i>
+                        </div>
+
+                        <span>
+                            Manage Plans
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
