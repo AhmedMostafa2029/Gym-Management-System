@@ -8,6 +8,10 @@ The system provides a centralized platform for managing members, trainers, sessi
 
 ## 📸 Screenshots
 
+### Login
+
+![Login](screenshots/login.png)
+
 ### Dashboard
 
 ![Dashboard](screenshots/dashboard.png)
