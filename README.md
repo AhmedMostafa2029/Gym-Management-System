@@ -6,6 +6,25 @@ The system provides a centralized platform for managing members, trainers, sessi
 
 ---
 
+---
+
+## 🌐 Live Demo
+
+The application is deployed and available online for testing.
+
+**Live Application:**  
+https://gym-managment.runasp.net/
+
+### 🔐 Demo Credentials
+
+- **Email:** admin@gmail.com
+- **Password:** P@ssw0rd
+- **Role:** Admin
+
+> The demo account has restricted permissions based on the Admin role. The application also supports a Super Admin role with full system access.
+
+---
+
 ## 📸 Screenshots
 
 ### Login
@@ -95,6 +114,15 @@ The system provides a centralized platform for managing members, trainers, sessi
 - Manage member attendance
 - Prevent invalid bookings
 
+### 🔐 Authentication & Authorization
+
+- Secure user authentication
+- Role-Based Access Control
+- Super Admin and Admin roles
+- Full system access for Super Admin
+- Restricted permissions for Admin users
+- Authorization based on user roles
+
 ---
 
 ## 🏗️ Architecture
@@ -168,6 +196,20 @@ The project follows **N-Tier Architecture** and is divided into three main layer
 - CancellationToken
 - Server-Side Pagination
 - Filtering and Searching
+
+### Deployment & Hosting
+
+- IIS Deployment
+- Cloud Hosting
+- Production Configuration
+- SQL Server Database Deployment
+- Connection String Configuration
+
+### Authentication & Authorization
+
+- Authentication
+- Role-Based Authorization
+- Super Admin & Admin Roles
 
 ---
 
@@ -258,7 +300,6 @@ dotnet run
 ## 🔮 Future Improvements
 
 - ASP.NET Core Identity
-- Role-Based Authorization
 - Advanced Dashboard Analytics
 - Email Notifications
 - Membership Expiration Notifications
