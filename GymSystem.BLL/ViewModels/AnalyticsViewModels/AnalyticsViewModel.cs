@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymSystem.BLL.ViewModels.AnalyticsViewModel
+namespace GymSystem.BLL.ViewModels.AnalyticsViewModels
 {
     public class AnalyticsViewModel
     {

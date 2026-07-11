@@ -17,4 +17,5 @@ namespace GymSystem.BLL.ViewModels.AccountViewModels
         public string Password { get; set; } = default!;
         public bool RememberMe { get; set; }  // saved cookies in browser true or false
     }
+
 }
