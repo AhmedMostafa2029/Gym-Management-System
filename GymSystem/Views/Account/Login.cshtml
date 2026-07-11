@@ -266,6 +266,133 @@
                     border-radius: 50%;
                     animation: spin 0.6s linear infinite;
                 }
+            /* ==================== Responsive Design ==================== */
+
+            /* Tablets */
+            @@media (max-width: 991.98px) {
+
+                body {
+                    align-items: flex-start;
+                    padding: 30px 20px;
+                }
+
+                .login-container {
+                    max-width: 700px;
+                    grid-template-columns: 1fr;
+                }
+
+                .login-form-section {
+                    padding: 50px 40px;
+                }
+
+                .gym-info-section {
+                    padding: 50px 40px;
+                }
+
+                .gym-icon {
+                    font-size: 90px;
+                }
+
+                .gym-title {
+                    font-size: 30px;
+                }
+
+                .gym-description br {
+                    display: none;
+                }
+            }
+
+
+            /* Mobile */
+            @@media (max-width: 575.98px) {
+
+                body {
+                    padding: 15px;
+                    align-items: flex-start;
+                }
+
+                .login-container {
+                    width: 100%;
+                    border-radius: 15px;
+                    grid-template-columns: 1fr;
+                }
+
+                .login-form-section {
+                    padding: 35px 20px;
+                }
+
+                .logo-section {
+                    margin-bottom: 25px;
+                }
+
+                .logo-icon {
+                    width: 65px;
+                    height: 65px;
+                    margin-bottom: 15px;
+                }
+
+                    .logo-icon i {
+                        font-size: 32px;
+                    }
+
+                .brand-name {
+                    font-size: 24px;
+                }
+
+                .login-title {
+                    font-size: 27px;
+                }
+
+                .login-subtitle {
+                    font-size: 14px;
+                    margin-bottom: 25px;
+                }
+
+                .form-control {
+                    font-size: 14px;
+                }
+
+                .btn-login {
+                    padding: 13px;
+                    font-size: 14px;
+                }
+
+                ..gym-info-section {
+                    display: none;
+                }
+
+                .gym-icon {
+                    font-size: 70px;
+                    margin-bottom: 20px;
+                }
+
+                .gym-title {
+                    font-size: 26px;
+                }
+
+                .gym-description {
+                    font-size: 14px;
+                    line-height: 1.6;
+                }
+
+                    .gym-description br {
+                        display: none;
+                    }
+
+                .stats-container {
+                    grid-template-columns: 1fr;
+                    gap: 12px;
+                    margin-top: 25px;
+                }
+
+                .stat-item {
+                    padding: 15px;
+                }
+
+                .stat-number {
+                    font-size: 26px;
+                }
+            }
 
     </style>
 </head>
