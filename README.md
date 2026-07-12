@@ -13,7 +13,7 @@ The system provides a centralized platform for managing members, trainers, sessi
 The application is deployed and available online for testing.
 
 **Live Application:**  
-https://gym-managment.runasp.net/
+[🌐 Live Demo ](https://bit.ly/4ycxZd3)
 
 ### 🔐 Demo Credentials
 
